@@ -30,7 +30,7 @@ function Login() {
         event.preventDefault();
         console.log(credentials);
 
-        const loginData = await fetch('http://localhost:5000/login', {
+        const loginData = await fetch('http://localhost:5000/loginUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,43 +45,47 @@ function Login() {
     }
 
     return (
-        <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-            <h2>Invite a Guest</h2>
-            <Form>
-                <Form.Group>
-                    <FloatingLabel
-                        controlId="userName"
-                        name="userName"
-                        label="User Name"
-                        className="mb-3"
-                    >
-                    <Form.Control
-                        name='userName'
-                        value={credentials.username} 
-                        placeholder='User Name' 
-                        style={{marginBottom: '1rem'}} 
-                        onChange={handleChange}
-                    />
-                    </FloatingLabel>
-                    
-                    <FloatingLabel
-                        controlId="password"
-                        name="password"
-                        label="Password"
-                        className="mb-3"
-                    >
-                    <Form.Control
-                        name="password"
-                        value={credentials.password} 
-                        placeholder='Password' 
-                        onChange={handleChange}
-                        className="mb-3"
-                    />
-                    </FloatingLabel>
-                </Form.Group>
-                <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Invite Guest</Button>
-            </Form>
-        </div>
+        <>
+            <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
+                <h2>~~Login~~</h2>
+                
+                <Form>
+                    <Form.Group>
+                        <FloatingLabel
+                            controlId="username"
+                            name="userName"
+                            label="User Name"
+                            className="mb-3"
+                        >
+                        <Form.Control
+                            name='username'
+                            value={credentials.username} 
+                            placeholder='User Name' 
+                            style={{marginBottom: '1rem'}} 
+                            onChange={handleChange}
+                        />
+                        </FloatingLabel>
+                        
+                        <FloatingLabel
+                            controlId="password"
+                            name="password"
+                            label="Password"
+                            className="mb-3"
+                        >
+                        <Form.Control
+                            name="password"
+                            type='password'
+                            value={credentials.password} 
+                            placeholder='Password' 
+                            onChange={handleChange}
+                            className="mb-3"
+                        />
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Invite Guest</Button>
+                </Form>
+            </div>
+        </>
     )
 
 }

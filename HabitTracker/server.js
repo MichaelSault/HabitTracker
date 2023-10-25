@@ -32,6 +32,14 @@ app.get("/", (req, res) => {
     res.send("Express is here");
 });
 
+////////////////db Functions///////////////////////
+app.post('/loginUser', async(req, res) => {
+    const result = await dbOperation.loginUser(req.body);
+    console.log("Returned From Query");
+    console.log(result.recordset[0]);
+    res.send(result.recordset[0]);
+});
+
 
 ////////////////////////////////////////////////////
 ////////////////JWT Functions///////////////////////
