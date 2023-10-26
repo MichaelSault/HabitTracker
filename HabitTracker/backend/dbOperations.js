@@ -1,5 +1,5 @@
 const loginUser = async(userCredentials) => {
-    console.log(userCredentials);
+    console.log("user logged in");
 
     try {
         console.log(userCredentials);
@@ -13,4 +13,8 @@ const loginUser = async(userCredentials) => {
     catch(error) {
         console.log(error);
     }
+}
+
+module.exports = {
+    loginUser
 }

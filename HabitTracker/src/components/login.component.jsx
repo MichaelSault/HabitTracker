@@ -30,7 +30,7 @@ function Login() {
         event.preventDefault();
         console.log(credentials);
 
-        const loginData = await fetch('http://localhost:5000/loginUser', {
+        const loginData = await fetch('http://localhost:3001/loginUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

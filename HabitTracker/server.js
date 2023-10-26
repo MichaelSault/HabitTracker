@@ -1,7 +1,8 @@
 const express = require('express'),
+    dbOperation = require('./backend/dbOperations'),
     JWT = require('./backend/JWT'),
     cors = require('cors'),
-    mongoose = require('mongoose'),
+    mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -16,15 +17,37 @@ app.use(cors());
 mongoose.connect(process.env.DB_CONN).catch(err => console.log(err));
 
 //DB SCHEMA AND MODEL
-const habitSchema = mongoose.Schema({
-    habitName: String
+const userSchema = mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    firstName: String,
+    lastName: String
 });
+
+const habitSchema = mongoose.Schema({
+    habitName: String,
+    userID: String,
+    frequency: Number,
+    timePeriod: Number,
+    validDays: Array
+});
+
+const habitLogSchema = mongoose.Schema({
+    habitID: String,
+    logDate: Date,
+    comment: String
+})
 
 const secretSchema = mongoose.Schema({
     JWTSecret: String
 });
 
-const Guests = mongoose.model("Guests", guestSchema);
+const Users = mongoose.model("Users", userSchema);
+
+const Habits = mongoose.model("Habits", habitSchema);
+
+const Logs = mongoose.model("Logs", habitLogSchema);
 
 const Secrets = mongoose.model("Secrets", secretSchema);
 
@@ -32,12 +55,35 @@ app.get("/", (req, res) => {
     res.send("Express is here");
 });
 
-////////////////db Functions///////////////////////
+////////////////////////////////////////////////////
+////////////////db Functions////////////////////////
+////////////////////////////////////////////////////
+
+//adds a new user to the database
+app.post("/SignUp", async (req, res) => {    
+    Users.create({
+        username: req.body.email,
+        email: req.body.email,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+    }).then(doc => console.log(doc))
+    .catch(err => console.log(err));
+});
+
+//checks is a user exists in the database
 app.post('/loginUser', async(req, res) => {
     const result = await dbOperation.loginUser(req.body);
     console.log("Returned From Query");
-    console.log(result.recordset[0]);
-    res.send(result.recordset[0]);
+});
+
+//adds a new habit to the database
+app.post("/CreateHabit", async (req, res) => {    
+    Habits.create({
+        habitTitle: String,
+
+    }).then(doc => console.log(doc))
+    .catch(err => console.log(err));
 });
 
 
