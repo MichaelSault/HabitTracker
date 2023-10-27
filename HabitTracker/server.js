@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 ////////////////////////////////////////////////////
 
 //adds a new user to the database
-app.post("/SignUp", async (req, res) => {    
+app.post("/SignUpUser", async (req, res) => {    
     Users.create({
         username: req.body.email,
         email: req.body.email,
