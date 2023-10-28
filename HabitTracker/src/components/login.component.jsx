@@ -47,7 +47,7 @@ function Login() {
     return (
         <>
             <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-                <h2>~~Login~~</h2>
+                <h2>Login</h2>
                 
                 <Form>
                     <Form.Group>
@@ -82,7 +82,7 @@ function Login() {
                         />
                         </FloatingLabel>
                     </Form.Group>
-                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Invite Guest</Button>
+                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Login</Button>
                 </Form>
             </div>
         </>
