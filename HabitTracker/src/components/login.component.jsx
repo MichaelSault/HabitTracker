@@ -1,5 +1,7 @@
 import {Button, Form} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
@@ -11,6 +13,18 @@ function Login() {
         password: ""
     });
 
+    useEffect(() => {
+        const loggedInUser = document.cookie.split('=')[1];
+        console.log(loggedInUser);
+        if (loggedInUser) {
+            console.log("User is logged in");
+            navigate("/Habits", {relative: "path"})
+        } else {
+            console.log("No user is logged in");
+        }
+        console.log(loggedInUser);
+    }, []);
+
     const handleChange = (event) => {
         const {name, value} = event.target;
 
@@ -21,10 +35,6 @@ function Login() {
             }
         });
     }
-
-    useEffect(() => {
-        console.log(credentials);
-    }, [credentials]);
 
     const handleClick = async (event) => {
         event.preventDefault();

@@ -27,8 +27,16 @@ function SignUp() {
     }
 
     useEffect(() => {
-        console.log(credentials);
-    }, [credentials]);
+        const loggedInUser = document.cookie.split('=')[1];
+        console.log(loggedInUser);
+        if (loggedInUser) {
+            console.log("User is logged in");
+            navigate("/Habits", {relative: "path"})
+        } else {
+            console.log("No user is logged in");
+        }
+        console.log(loggedInUser);
+    }, []);
 
     const handleClick = async (event) => {
         event.preventDefault();
