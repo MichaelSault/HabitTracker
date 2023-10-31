@@ -61,14 +61,8 @@ app.get("/", (req, res) => {
 
 //adds a new user to the database
 app.post("/SignUpUser", async (req, res) => {    
-    Users.create({
-        username: req.body.email,
-        email: req.body.email,
-        password: req.body.password,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-    }).then(doc => console.log(doc))
-    .catch(err => console.log(err));
+    const result = await dbOperation.signUpUser(req.body);
+    console.log("Returned From Query");
 });
 
 //checks is a user exists in the database
@@ -79,11 +73,8 @@ app.post('/loginUser', async(req, res) => {
 
 //adds a new habit to the database
 app.post("/CreateHabit", async (req, res) => {    
-    Habits.create({
-        habitTitle: String,
-
-    }).then(doc => console.log(doc))
-    .catch(err => console.log(err));
+    const result = await dbOperation.createHabit(req.body);
+    console.log("Returned From Query");
 });
 
 
