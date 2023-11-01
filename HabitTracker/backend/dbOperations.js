@@ -1,9 +1,48 @@
+const mongoose = require('mongoose');
+
+//DB SCHEMA AND MODEL
+const userSchema = mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    firstName: String,
+    lastName: String
+});
+
+const habitSchema = mongoose.Schema({
+    habitName: String,
+    userID: String,
+    frequency: Number,
+    timePeriod: Number,
+    validDays: Array
+});
+
+const habitLogSchema = mongoose.Schema({
+    habitID: String,
+    logDate: Date,
+    comment: String
+})
+
+const secretSchema = mongoose.Schema({
+    JWTSecret: String
+});
+
+const Users = mongoose.model("Users", userSchema);
+
+const Habits = mongoose.model("Habits", habitSchema);
+
+const Logs = mongoose.model("Logs", habitLogSchema);
+
+const Secrets = mongoose.model("Secrets", secretSchema);
+
+
+//DB OPERATIONS
 const loginUser = async(userCredentials) => {
     console.log("user logged in");
 
     try {
         console.log(userCredentials);
-        let returnedUser = await Users.find({username: req.query.username, password: req.query.password})
+        let returnedUser = await Users.find({username: userCredentials.query.username, password: userCredentials.query.password})
         .catch((err) => console.log(err));
 
         console.log("Returned From Query: ", returnedUser[0]);
@@ -21,16 +60,16 @@ const signUpUser = async(userCredentials) => {
     try {
         console.log(userCredentials);
         let returnedUser = await Users.create({
-            username: req.body.email,
-            email: req.body.email,
-            password: req.body.password,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName
+            username: userCredentials.username,
+            email: userCredentials.email,
+            password: userCredentials.password,
+            firstName: userCredentials.firstName,
+            lastName: userCredentials.lastName
         })
         .then(doc => console.log(doc))
         .catch((err) => console.log(err));
 
-        console.log("Returned From Query: ", returnedUser[0]);
+        console.log("Returned From Query: ", returnedUser);
 
         return returnedUser;
     }
@@ -44,14 +83,14 @@ const createHabit = async(habitDetails) => {
     console.log("user signed up");
 
     try {
-        console.log(userCredentials);
+        console.log(habitDetails);
         let returnedHabit = await Habits.create({
-            habitTitle: req.body.habitTitle
+            habitTitle: habitDetails.habitTitle
         })
         .then(doc => console.log(doc))
         .catch((err) => console.log(err));
 
-        console.log("Returned From Query: ", returnedUser[0]);
+        console.log("Returned From Query: ", returnedHabit[0]);
 
         return returnedHabit;
     }

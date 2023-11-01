@@ -16,41 +16,6 @@ app.use(cors());
 //eventually this should be removed due to security issues but while testing I'll leave it
 mongoose.connect(process.env.DB_CONN).catch(err => console.log(err));
 
-//DB SCHEMA AND MODEL
-const userSchema = mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    firstName: String,
-    lastName: String
-});
-
-const habitSchema = mongoose.Schema({
-    habitName: String,
-    userID: String,
-    frequency: Number,
-    timePeriod: Number,
-    validDays: Array
-});
-
-const habitLogSchema = mongoose.Schema({
-    habitID: String,
-    logDate: Date,
-    comment: String
-})
-
-const secretSchema = mongoose.Schema({
-    JWTSecret: String
-});
-
-const Users = mongoose.model("Users", userSchema);
-
-const Habits = mongoose.model("Habits", habitSchema);
-
-const Logs = mongoose.model("Logs", habitLogSchema);
-
-const Secrets = mongoose.model("Secrets", secretSchema);
-
 app.get("/", (req, res) => {
     res.send("Express is here");
 });

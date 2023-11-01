@@ -11,8 +11,8 @@ function SignUp() {
         password: "",
         confirmPassword: "",
         email: "",
-        firstname: "",
-        lastname: ""
+        firstName: "",
+        lastName: ""
     });
 
     const handleChange = (event) => {
@@ -94,14 +94,14 @@ function SignUp() {
                         </FloatingLabel>
 
                         <FloatingLabel
-                            controlId="firstname"
+                            controlId="firstName"
                             name="firstName"
                             label="First Name"
                             className="mb-3"
                         >
                         <Form.Control
-                            name='firstname'
-                            value={credentials.firstname} 
+                            name='firstName'
+                            value={credentials.firstName} 
                             placeholder='First Name' 
                             style={{marginBottom: '1rem'}} 
                             onChange={handleChange}
@@ -109,14 +109,14 @@ function SignUp() {
                         </FloatingLabel>
 
                         <FloatingLabel
-                            controlId="lastname"
+                            controlId="lastName"
                             name="lastName"
                             label="Last Name"
                             className="mb-3"
                         >
                         <Form.Control
-                            name='lastname'
-                            value={credentials.lastname} 
+                            name='lastName'
+                            value={credentials.lastName} 
                             placeholder='Last Name' 
                             style={{marginBottom: '1rem'}} 
                             onChange={handleChange}
