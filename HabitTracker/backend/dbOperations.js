@@ -42,7 +42,7 @@ const loginUser = async(userCredentials) => {
 
     try {
         console.log(userCredentials);
-        let returnedUser = await Users.find({username: userCredentials.query.username, password: userCredentials.query.password})
+        let returnedUser = await Users.find({username: userCredentials.username, password: userCredentials.password})
         .catch((err) => console.log(err));
 
         console.log("Returned From Query: ", returnedUser[0]);
