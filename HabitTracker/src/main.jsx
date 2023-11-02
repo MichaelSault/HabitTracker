@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/home.component.jsx';
 import Login from './components/login.component.jsx';
 import SignUp from './components/signup.component.jsx';
+import Habits from './components/habitTracker.component.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <> 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/' element={<Home />}/>
             <Route path='/Login' element={<Login />}/>
             <Route path='/SignUp' element={<SignUp />}/>
+            <Route path='/Habits' element={<Habits />}/>
           </Routes>
         </BrowserRouter>
       </React.StrictMode>

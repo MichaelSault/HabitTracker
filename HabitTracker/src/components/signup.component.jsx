@@ -42,7 +42,7 @@ function SignUp() {
         event.preventDefault();
         console.log(credentials);
 
-        const loginData = await fetch('http://localhost:3001/signUpUser', {
+        const userData = await fetch('http://localhost:3001/signUpUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ function SignUp() {
             })
         })
         .then(res => res.json());
-        console.log(loginData);
+        console.log(userData);
     }
 
     return (

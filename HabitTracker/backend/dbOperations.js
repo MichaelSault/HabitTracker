@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
 });
 
 const habitSchema = mongoose.Schema({
-    habitName: String,
+    habitTitle: String,
+    habitDescription: String,
     userID: String,
     frequency: Number,
     timePeriod: Number,
@@ -38,7 +39,7 @@ const Secrets = mongoose.model("Secrets", secretSchema);
 
 //DB OPERATIONS
 const loginUser = async(userCredentials) => {
-    console.log("user logged in");
+    console.log("logging in a user...");
 
     try {
         console.log(userCredentials);
@@ -55,7 +56,7 @@ const loginUser = async(userCredentials) => {
 }
 
 const signUpUser = async(userCredentials) => {
-    console.log("user signed up");
+    console.log("signing up a user...");
 
     try {
         console.log(userCredentials);
@@ -80,17 +81,18 @@ const signUpUser = async(userCredentials) => {
 
 
 const createHabit = async(habitDetails) => {
-    console.log("user signed up");
+    console.log("creating a habit...");
 
     try {
         console.log(habitDetails);
         let returnedHabit = await Habits.create({
-            habitTitle: habitDetails.habitTitle
+            habitTitle: habitDetails.habitTitle,
+            habitDescription: habitDetails.habitDescription
         })
         .then(doc => console.log(doc))
         .catch((err) => console.log(err));
 
-        console.log("Returned From Query: ", returnedHabit[0]);
+        console.log("Returned From Query: ", returnedHabit);
 
         return returnedHabit;
     }

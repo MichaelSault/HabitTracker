@@ -7,10 +7,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import '../App.css';
 
-function Login() {
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: ""
+function HabitTracker() {
+    const [habitDetails, setHabitDetails] = useState({
+        habitTitle: "",
+        habitDescription: ""
     });
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function Login() {
     const handleChange = (event) => {
         const {name, value} = event.target;
 
-        setCredentials(prev => {
+        setHabitDetails(prev => {
             return {
                 ...prev,
                 [name]: value,
@@ -38,55 +38,55 @@ function Login() {
 
     const handleClick = async (event) => {
         event.preventDefault();
-        console.log(credentials);
+        console.log(habitDetails);
 
-        const userData = await fetch('http://localhost:3001/loginUser', {
+        const habitData = await fetch('http://localhost:3001/createHabit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                ...credentials
+                ...habitDetails
             })
         })
         .then(res => res.json());
-        console.log(userData);
+        console.log(habitData);
     }
 
     return (
         <>
             <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-                <h2>Login</h2>
+                <h2>Create A Habit</h2>
                 
                 <Form>
                     <Form.Group>
                         <FloatingLabel
-                            controlId="username"
-                            name="userName"
-                            label="User Name"
+                            controlId="habitTitle"
+                            name="habitTitle"
+                            label="Habit Title"
                             className="mb-3"
                         >
                         <Form.Control
-                            name='username'
-                            value={credentials.username} 
-                            placeholder='User Name' 
+                            name='habitTitle'
+                            value={habitDetails.habitTitle} 
+                            placeholder='Habit Title' 
                             style={{marginBottom: '1rem'}} 
                             onChange={handleChange}
                         />
                         </FloatingLabel>
                         
                         <FloatingLabel
-                            controlId="password"
-                            name="password"
-                            label="Password"
+                            controlId="habitDescription"
+                            name="habitDescription"
+                            label="Description"
                             className="mb-3"
                         >
                         <Form.Control
-                            name="password"
-                            type='password'
-                            value={credentials.password} 
-                            placeholder='Password' 
+                            name="habitDescription"
+                            type='habitDescription'
+                            value={habitDetails.habitDescription} 
+                            placeholder='Describe your habit' 
                             onChange={handleChange}
                             className="mb-3"
                         />
@@ -100,4 +100,4 @@ function Login() {
 
 }
 
-export default Login
+export default HabitTracker
