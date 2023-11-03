@@ -101,6 +101,23 @@ const createHabit = async(habitDetails) => {
     }
 }
 
+const getHabits = async(userCredentials) => {
+    console.log("getting a habit...");
+
+    try {
+        console.log(userCredentials);
+        let returnedHabits = await Habits.find({username: userCredentials.userID})
+        .catch((err) => console.log(err));
+
+        console.log("Returned From Query: ", returnedHabits);
+
+        return returnedHabits;
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
 
 
 

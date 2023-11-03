@@ -42,6 +42,12 @@ app.post("/createHabit", async (req, res) => {
     console.log("Returned From Query");
 });
 
+//gets a list of habits to the database
+app.post("/getHabits", async (req, res) => {    
+    const result = await dbOperation.getHabits(req.body);
+    console.log("Returned From Query");
+});
+
 
 ////////////////////////////////////////////////////
 ////////////////JWT Functions///////////////////////
