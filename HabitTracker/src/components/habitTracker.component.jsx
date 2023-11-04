@@ -1,17 +1,35 @@
+import React from 'react'
 import {Button, Form} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
+import CreateHabit from "./createHabit.component";
 import '../App.css';
 
+//define the modal style
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
+
+
 function HabitTracker() {
-    const [habitDetails, setHabitDetails] = useState({
-        habitTitle: "",
-        habitDescription: ""
-    });
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     useEffect(() => {
         const loggedInUser = document.cookie.split('=')[1];
@@ -25,75 +43,23 @@ function HabitTracker() {
         console.log(loggedInUser);
     }, []);
 
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-
-        setHabitDetails(prev => {
-            return {
-                ...prev,
-                [name]: value,
-            }
-        });
-    }
-
-    const handleClick = async (event) => {
-        event.preventDefault();
-        console.log(habitDetails);
-
-        const habitData = await fetch('http://localhost:3001/createHabit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                ...habitDetails
-            })
-        })
-        .then(res => res.json());
-        console.log(habitData);
-    }
-
     return (
         <>
             <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-                <h2>Create A Habit</h2>
+                <h2>Habit Tracker</h2>
+
+                <Button onClick={handleOpen}>New Habit</Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
+                        <CreateHabit />
+                    </Box>
+                </Modal>
                 
-                <Form>
-                    <Form.Group>
-                        <FloatingLabel
-                            controlId="habitTitle"
-                            name="habitTitle"
-                            label="Habit Title"
-                            className="mb-3"
-                        >
-                        <Form.Control
-                            name='habitTitle'
-                            value={habitDetails.habitTitle} 
-                            placeholder='Habit Title' 
-                            style={{marginBottom: '1rem'}} 
-                            onChange={handleChange}
-                        />
-                        </FloatingLabel>
-                        
-                        <FloatingLabel
-                            controlId="habitDescription"
-                            name="habitDescription"
-                            label="Description"
-                            className="mb-3"
-                        >
-                        <Form.Control
-                            name="habitDescription"
-                            type='habitDescription'
-                            value={habitDetails.habitDescription} 
-                            placeholder='Describe your habit' 
-                            onChange={handleChange}
-                            className="mb-3"
-                        />
-                        </FloatingLabel>
-                    </Form.Group>
-                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Login</Button>
-                </Form>
             </div>
         </>
     )
