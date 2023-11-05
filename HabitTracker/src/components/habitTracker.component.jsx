@@ -25,6 +25,16 @@ const style = {
     p: 4,
 };
 
+//define the modal style
+const style2 = {
+    transform: 'translate(12.5%, 50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 5,
+    p: 4,
+};
+
 
 function HabitTracker() {
     const [open, setOpen] = React.useState(false);
@@ -60,6 +70,24 @@ function HabitTracker() {
                     </Box>
                 </Modal>
                 
+                <Box sx={style2}>
+                    <h3>Read before bed</h3>
+                    <button>Completed</button>
+                    <button>View</button>
+                    <button>Failed</button>
+                </Box>
+                <Box sx={style2}>
+                    <h3>Go for a run</h3>
+                    <button>Completed</button>
+                    <button>View</button>
+                    <button>Failed</button>
+                </Box>
+                <Box sx={style2}>
+                    <h3>Study for 1 hour or more</h3>
+                    <button>Completed</button>
+                    <button>View</button>
+                    <button>Failed</button>
+                </Box>
             </div>
         </>
     )
