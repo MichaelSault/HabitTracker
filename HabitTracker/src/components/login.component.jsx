@@ -52,6 +52,42 @@ function Login() {
         })
         .then(res => res.json());
         console.log(userData);
+
+        getJWT(userData);
+    }
+
+    const cookies = new Cookies();
+    
+    async function getJWT(userData) {
+        //add check to see if username and password match
+        console.log(userData);
+        console.log(credentials);
+        var JWT = "";
+
+        if ((userData.username = credentials.username) && (userData.password = credentials.password)){
+            JWT = await fetch('http://localhost:3001/JWT', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    userID: userData._id,
+                    username: userData.username,
+                    email: userData.email,
+                    password: userData.password, //will be hashed and salted before production
+                    firstname: userData.firstname,
+                    lastname: userData.lastname
+                })
+            })
+            .then(res => res.text());
+            console.log(JWT);
+            cookies.set("user-authentication", JWT);
+            navigate("/habits");
+        } else {
+            console.log("Username and Password Mismatch!");
+        }
+        console.log(JWT);
     }
 
     return (
