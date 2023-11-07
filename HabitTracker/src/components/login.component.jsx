@@ -8,10 +8,22 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import '../App.css';
 
 function Login() {
+    const navigate = useNavigate();
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
     });
+
+    const [returnedData, setReturnedData] = useState({
+        _id: "", 
+        username: "", 
+        password: "", 
+        email: "", 
+        firstname: "", 
+        lastname: ""
+    });
+
 
     useEffect(() => {
         const loggedInUser = document.cookie.split('=')[1];
@@ -36,7 +48,7 @@ function Login() {
         });
     }
 
-    const handleClick = async (event) => {
+    const logIn = async (event) => {
         event.preventDefault();
         console.log(credentials);
 
@@ -51,7 +63,9 @@ function Login() {
             })
         })
         .then(res => res.json());
-        console.log(userData);
+
+        console.log("does this run?", userData);
+        setReturnedData(userData);
 
         getJWT(userData);
     }
@@ -128,7 +142,7 @@ function Login() {
                         />
                         </FloatingLabel>
                     </Form.Group>
-                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={handleClick}>Login</Button>
+                    <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={logIn}>Login</Button>
                 </Form>
             </div>
         </>

@@ -118,9 +118,6 @@ const getHabits = async(userCredentials) => {
     }
 }
 
-
-
-
 module.exports = {
     loginUser,
     signUpUser,

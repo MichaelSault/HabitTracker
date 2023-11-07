@@ -33,7 +33,8 @@ app.post("/SignUpUser", async (req, res) => {
 //checks is a user exists in the database
 app.post('/loginUser', async(req, res) => {
     const result = await dbOperation.loginUser(req.body);
-    console.log("Returned From Query");
+    console.log("Returned From Query --->", result);
+    res.send(result);
 });
 
 //adds a new habit to the database
@@ -56,10 +57,7 @@ app.post("/getHabits", async (req, res) => {
 //returns data from JWT payload
 app.post('/decodeJWT', async(req, res) => {
     //set Secret
-    const secret = await Secrets.find()
-        .catch((err) => console.log(err));
-
-    const secretKey = secret[0].JWTSecret;
+    const secretKey = process.env.JWT_SECRET;
 
     //set JWT
     const jwtToVerify = req.body.Token;
@@ -80,10 +78,7 @@ app.post('/decodeJWT', async(req, res) => {
 app.post('/JWT', async(req, res) => {
     console.log("==========================================called JWT on server.js==========================================");
     //set Secret
-    const secret = await Secrets.find()
-        .catch((err) => console.log(err));
-    
-    const secretKey = secret[0].JWTSecret;
+    const secretKey = process.env.JWT_SECRET;
 
     console.log(req.body);
     const JasonWebToken = await JWT.getJWT(req.body, secretKey);
@@ -100,10 +95,7 @@ app.post('/JWT', async(req, res) => {
 //returns true if valid JWT
 app.post('/verifyJWT', async(req, res) => {
     //set Secret
-    const secret = await Secrets.find()
-        .catch((err) => console.log(err));
-
-    const secretKey = secret[0].JWTSecret;
+    const secretKey = process.env.JWT_SECRET;
 
     const jwtToVerify = req.body.Token;
     console.log("JWT to verify: " + jwtToVerify);

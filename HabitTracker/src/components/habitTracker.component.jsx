@@ -41,17 +41,45 @@ function HabitTracker() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [userData, setUserData] = useState({
+        _id: "", 
+        username: "", 
+        password: "", 
+        email: "", 
+        firstname: "", 
+        lastname: ""
+    });
+
     useEffect(() => {
         const loggedInUser = document.cookie.split('=')[1];
         console.log(loggedInUser);
         if (loggedInUser) {
             console.log("User is logged in");
-            navigate("/Habits", {relative: "path"})
+            decodeJWT(loggedInUser);
         } else {
             console.log("No user is logged in");
+            Navigate("/Login");
         }
         console.log(loggedInUser);
     }, []);
+
+    const decodeJWT = async (token) => {
+        console.log("token: ", token)
+        const tokenData = await fetch('http://localhost:3001/decodeJWT', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            Token: token
+        })
+        })
+        .then(res => res.json());
+
+        console.log("token data -->", tokenData);
+        setUserData(tokenData);
+    }
 
     return (
         <>
