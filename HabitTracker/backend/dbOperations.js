@@ -22,20 +22,14 @@ const habitLogSchema = mongoose.Schema({
     habitID: String,
     logDate: Date,
     comment: String
-})
-
-const secretSchema = mongoose.Schema({
-    JWTSecret: String
 });
+
 
 const Users = mongoose.model("Users", userSchema);
 
 const Habits = mongoose.model("Habits", habitSchema);
 
 const Logs = mongoose.model("Logs", habitLogSchema);
-
-const Secrets = mongoose.model("Secrets", secretSchema);
-
 
 //DB OPERATIONS
 const loginUser = async(userCredentials) => {
@@ -121,5 +115,6 @@ const getHabits = async(userCredentials) => {
 module.exports = {
     loginUser,
     signUpUser,
-    createHabit
+    createHabit,
+    getHabits
 }

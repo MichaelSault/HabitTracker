@@ -28,6 +28,7 @@ app.get("/", (req, res) => {
 app.post("/SignUpUser", async (req, res) => {    
     const result = await dbOperation.signUpUser(req.body);
     console.log("Returned From Query");
+    res.send(result);
 });
 
 //checks is a user exists in the database
@@ -41,12 +42,14 @@ app.post('/loginUser', async(req, res) => {
 app.post("/createHabit", async (req, res) => {    
     const result = await dbOperation.createHabit(req.body);
     console.log("Returned From Query");
+    res.send(result);
 });
 
 //gets a list of habits to the database
 app.post("/getHabits", async (req, res) => {    
     const result = await dbOperation.getHabits(req.body);
     console.log("Returned From Query");
+    res.send(result);
 });
 
 
