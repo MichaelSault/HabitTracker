@@ -37,6 +37,8 @@ const style2 = {
 
 
 function HabitTracker() {
+    const navigate = useNavigate();
+    
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -58,7 +60,7 @@ function HabitTracker() {
             decodeJWT(loggedInUser);
         } else {
             console.log("No user is logged in");
-            Navigate("/Login");
+            navigate("/login");
         }
         console.log(loggedInUser);
     }, []);

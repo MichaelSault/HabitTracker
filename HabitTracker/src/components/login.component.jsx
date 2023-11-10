@@ -62,20 +62,22 @@ function Login() {
                 ...credentials
             })
         })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(res => console.log(res));
 
         console.log("does this run?", userData);
         setReturnedData(userData);
 
-        getJWT(userData);
+        getJWT(returnedData);
     }
 
     const cookies = new Cookies();
     
     async function getJWT(userData) {
         //add check to see if username and password match
-        console.log(userData);
+        console.log("check user data submitted to getJWT -->", userData);
         console.log(credentials);
+        console.log("returned data", returnedData);
         var JWT = "";
 
         if ((userData.username = credentials.username) && (userData.password = credentials.password)){

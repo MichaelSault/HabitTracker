@@ -1,11 +1,14 @@
 import {Button, Form} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import '../App.css';
 
 function SignUp() {
+    const navigate = useNavigate();
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: "",

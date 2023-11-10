@@ -44,7 +44,7 @@ const createSignature = (jwtB64Header, jwtB64Payload, secret) => {
 }
 
 const getJWT = async(userData, secret) => {
-    console.log(userData);
+    console.log("user data -----> ", userData);
     //create the header
     const b64Header = toBase64 (header);
     const jwtB64Header = replaceSpecialChars(b64Header);
@@ -57,10 +57,10 @@ const getJWT = async(userData, secret) => {
         exp: 60*60*24,      // sets to expire in 24hours
 
         //user data
+        username: userData.username,
         email: userData.email,
-        code: userData.code,
-        firstName: userData.firstName,
-        lastName: userData.lastName
+        firstname: userData.firstname,
+        lastname: userData.lastname
     }
 
     // converts payload to base64
