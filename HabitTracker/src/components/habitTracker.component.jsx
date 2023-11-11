@@ -86,7 +86,7 @@ function HabitTracker() {
     return (
         <>
             <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-                <h2>Habit Tracker</h2>
+                <h2>{userData.username}'s Habit Tracker</h2>
 
                 <Button onClick={handleOpen}>New Habit</Button>
                 <Modal
