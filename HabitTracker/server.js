@@ -25,8 +25,9 @@ app.get("/", (req, res) => {
 ////////////////////////////////////////////////////
 
 //adds a new user to the database
-app.post("/SignUpUser", async (req, res) => {    
-    const result = await dbOperation.signUpUser(req.body);
+app.post("/SignUpUser", async (req, res) => {
+    const hashedPassword = await passHash.hashPassword(req.body.password);
+    const result = await dbOperation.signUpUser(req.body, hashedPassword);
     console.log("Returned From Query");
     res.send(result);
 });
