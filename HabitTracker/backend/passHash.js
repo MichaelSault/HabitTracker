@@ -3,20 +3,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const hashPassword = (userPassword) => {
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        return bcrypt.hash(userPassword, salt, function(err, hash){
-            console.log()
-        });
-    });
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(userPassword, salt);
+    console.log(hash);
+    return hash;
 }
 
 const validatePassword = (userPassword, hash) => {
-    bcrypt.compare(userPassword, hash)
-        .then(res => {
-            console.log(res);
-            return res
-        })
-        .catch(err => console.error(err.message));
+    const validated = bcrypt.compareSync(userPassword, hash); //returns a bool value
+    return validated;
 }
 
 module.exports = {

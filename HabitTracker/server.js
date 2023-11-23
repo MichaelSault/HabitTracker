@@ -2,7 +2,8 @@ const express = require('express'),
     dbOperation = require('./backend/dbOperations'),
     JWT = require('./backend/JWT'),
     cors = require('cors'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    passHash = require('./backend/passHash');
 
 const dotenv = require('dotenv');
 dotenv.config();

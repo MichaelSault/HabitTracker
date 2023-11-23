@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passHash = require('./passHash');
 
 //DB SCHEMA AND MODEL
 const userSchema = mongoose.Schema({
@@ -54,10 +55,13 @@ const signUpUser = async(userCredentials) => {
 
     try {
         console.log(userCredentials);
+        let hashedPassword = passHash.hashPassword(userCredentials.password);
+        console.log("hashed password: ", hashedPassword);
+
         let returnedUser = await Users.create({
             username: userCredentials.username,
             email: userCredentials.email,
-            password: userCredentials.password,
+            password: hashedPassword,
             firstName: userCredentials.firstName,
             lastName: userCredentials.lastName
         })
