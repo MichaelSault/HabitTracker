@@ -5,7 +5,7 @@ const passHash = require('./passHash');
 const userSchema = mongoose.Schema({
     username: String,
     email: String,
-    password: String,
+    hashedPassword: String,
     firstName: String,
     lastName: String
 });
@@ -34,12 +34,24 @@ const Logs = mongoose.model("Logs", habitLogSchema);
 
 //DB OPERATIONS
 const loginUser = async(userCredentials) => {
+    var result;
     console.log("logging in a user...");
 
     try {
-        console.log(userCredentials);
-        let returnedUser = await Users.find({username: userCredentials.username, password: userCredentials.password})
+        console.log(userCredentials.username);
+        //returns a user with the correct username from the database
+        const returnedUser = await Users.find({username: userCredentials.username})
+        .then((res) => (result = res[0].hashedPassword))
         .catch((err) => console.log(err));
+        
+        console.log(result);
+
+        if (passHash.validatePassword(userCredentials.password, result)){
+            console.log("User validated");
+            return returnedUser;
+        } else {
+            console.log("Incorrect password");
+        }
 
         console.log("Returned From Query: ", returnedUser);
 
@@ -61,7 +73,7 @@ const signUpUser = async(userCredentials) => {
         let returnedUser = await Users.create({
             username: userCredentials.username,
             email: userCredentials.email,
-            password: hashedPassword,
+            hashedPassword: hashedPassword,
             firstName: userCredentials.firstName,
             lastName: userCredentials.lastName
         })

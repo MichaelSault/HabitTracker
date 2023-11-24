@@ -10,6 +10,7 @@ const hashPassword = (userPassword) => {
 }
 
 const validatePassword = (userPassword, hash) => {
+    console.log(userPassword, hash);
     const validated = bcrypt.compareSync(userPassword, hash); //returns a bool value
     return validated;
 }

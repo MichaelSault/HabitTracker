@@ -18,7 +18,7 @@ function Login() {
     const [returnedData, setReturnedData] = useState({
         _id: "", 
         username: "", 
-        password: "", 
+        hashedPassword: "", 
         email: "", 
         firstname: "", 
         lastname: ""
