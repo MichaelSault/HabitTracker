@@ -41,13 +41,14 @@ const loginUser = async(userCredentials) => {
         console.log(userCredentials.username);
         //returns a user with the correct username from the database
         const returnedUser = await Users.find({username: userCredentials.username})
-        .then((res) => (result = res[0].hashedPassword))
+        .then((res) => (result = res))
         .catch((err) => console.log(err));
         
         console.log(result);
 
-        if (passHash.validatePassword(userCredentials.password, result)){
+        if (passHash.validatePassword(userCredentials.password, result[0].hashedPassword)){
             console.log("User validated");
+            console.log(result);
             return returnedUser;
         } else {
             console.log("Incorrect password");
