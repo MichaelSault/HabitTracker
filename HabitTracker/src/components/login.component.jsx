@@ -49,6 +49,7 @@ function Login() {
     }
 
     const logIn = async (event) => {
+        var result;
         event.preventDefault();
         console.log(credentials);
 
@@ -62,11 +63,11 @@ function Login() {
                 ...credentials
             })
         })
-        .then(res => res.json())
-        .then(res => console.log(res));
+        .then(res => result = res)
+        .then(res => console.log("returned from logIn", res));
 
         console.log("does this run?", userData);
-        setReturnedData(userData);
+        setReturnedData(result);
 
         getJWT(returnedData);
     }
@@ -96,7 +97,7 @@ function Login() {
                     lastname: userData.lastname
                 })
             })
-            .then(res => res.text());
+            .then(res => console.log(res));
             console.log(JWT);
             cookies.set("user-authentication", JWT);
             navigate("/habits");

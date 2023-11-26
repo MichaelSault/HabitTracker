@@ -57,6 +57,7 @@ const getJWT = async(userData, secret) => {
         exp: 60*60*24,      // sets to expire in 24hours
 
         //user data
+        id: userData._id,
         username: userData.username,
         email: userData.email,
         firstname: userData.firstname,
