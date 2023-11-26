@@ -63,7 +63,7 @@ function Login() {
                 ...credentials
             })
         })
-        .then(res => result = res)
+        .then(res => result = res.json())
         .then(res => console.log("returned from logIn", res));
 
         console.log("does this run?", userData);
@@ -97,7 +97,7 @@ function Login() {
                     lastname: userData.lastname
                 })
             })
-            .then(res => console.log(res));
+            .then(res => res.text());
             console.log(JWT);
             cookies.set("user-authentication", JWT);
             navigate("/habits");
