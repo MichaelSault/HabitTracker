@@ -20,8 +20,8 @@ function Login() {
         username: "", 
         hashedPassword: "", 
         email: "", 
-        firstname: "", 
-        lastname: ""
+        firstName: "", 
+        lastName: ""
     });
 
 
@@ -49,7 +49,6 @@ function Login() {
     }
 
     const logIn = async (event) => {
-        var result;
         event.preventDefault();
         console.log(credentials);
 
@@ -63,13 +62,12 @@ function Login() {
                 ...credentials
             })
         })
-        .then(res => result = res.json())
-        .then(res => console.log("returned from logIn", res));
+        .then(res => res.json())
+        .then(res => getJWT(res));
 
         console.log("does this run?", userData);
-        setReturnedData(result);
 
-        getJWT(returnedData);
+        //getJWT(returnedData);
     }
 
     const cookies = new Cookies();
@@ -92,9 +90,9 @@ function Login() {
                     userID: userData._id,
                     username: userData.username,
                     email: userData.email,
-                    password: userData.password, //will be hashed and salted before production
-                    firstname: userData.firstname,
-                    lastname: userData.lastname
+                    password: userData.hashedPassword,
+                    firstName: userData.firstName,
+                    lastName: userData.lastName
                 })
             })
             .then(res => res.text());

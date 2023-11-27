@@ -37,7 +37,9 @@ app.post("/SignUpUser", async (req, res) => {
 app.post('/loginUser', async(req, res) => {
     const result = await dbOperation.loginUser(req.body);
     console.log("Returned From Query --->", result[0]._id.toHexString());
-    res.send(result);
+    console.log(result[0]);
+    res.send (result[0]);
+    console.log("was this code reached?");
 });
 
 //adds a new habit to the database
