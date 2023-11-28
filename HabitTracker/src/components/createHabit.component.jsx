@@ -8,11 +8,41 @@ import '../App.css';
 function HabitTracker() {
     const [habitDetails, setHabitDetails] = useState({
         habitTitle: "",
-        habitDescription: ""
+        habitDescription: "",
+        sunday: false,
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
     });
 
+    const handleChangeBool = (event) => {
+        let {name, value} = event.target;
+        
+        console.log(habitDetails[name]);
+
+        if(habitDetails[name] != true){
+            value = true;
+        } else {
+            value = false;
+        }
+
+        console.log(name, ":", value);
+
+        setHabitDetails(prev => {
+            return {
+                ...prev,
+                [name]: value,
+            }
+        });
+    }
+
     const handleChange = (event) => {
-        const {name, value} = event.target;
+        let {name, value} = event.target;
+
+        console.log(name, ":", value);
 
         setHabitDetails(prev => {
             return {
@@ -68,63 +98,71 @@ function HabitTracker() {
                             className="mb-3"
                         >
                         <Form.Control
-                            name="habitDescription"
+                            name='habitDescription'
                             type='habitDescription'
                             value={habitDetails.habitDescription} 
                             placeholder='Describe your habit' 
                             onChange={handleChange}
-                            className="mb-3"
+                            className='mb-3'
                         />
                         </FloatingLabel>
 
                         <Form.Check
                             inline
-                            label="S"
-                            name="group1"
+                            label='S'
+                            name='sunday'
                             type='checkbox'
-                            id={`sunday`}
+                            value="true"
+                            id='sunday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="M"
-                            name="group1"
+                            label='M'
+                            name='monday'
                             type='checkbox'
-                            id={`monday`}
+                            id='monday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="T"
-                            name="group1"
+                            label='T'
+                            name='tuesday'
                             type='checkbox'
-                            id={`tuesday`}
+                            id='tuesday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="W"
-                            name="group1"
+                            label='W'
+                            name='wednesday'
                             type='checkbox'
-                            id={`wednesday`}
+                            id='wednesday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="Th"
-                            name="group1"
+                            label='Th'
+                            name='thursday'
                             type='checkbox'
-                            id={`thursday`}
+                            id='thursday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="F"
-                            name="group1"
+                            label='F'
+                            name='friday'
                             type='checkbox'
-                            id={`friday`}
+                            id='friday'
+                            onChange={handleChangeBool}
                         />
                         <Form.Check
                             inline
-                            label="S"
-                            name="group1"
+                            label='S'
+                            name='saturday'
                             type='checkbox'
-                            id="saturday"
+                            id='saturday'
+                            onChange={handleChangeBool}
                         />
 
                     </Form.Group>

@@ -45,8 +45,8 @@ app.post('/loginUser', async(req, res) => {
 //adds a new habit to the database
 app.post("/createHabit", async (req, res) => {    
     const result = await dbOperation.createHabit(req.body);
-    console.log("Returned From Query");
-    res.send(result);
+    console.log("Returned From Query", result[0]);
+    res.send(result[0]);
 });
 
 //gets a list of habits to the database

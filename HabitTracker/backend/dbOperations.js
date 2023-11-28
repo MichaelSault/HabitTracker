@@ -14,9 +14,13 @@ const habitSchema = mongoose.Schema({
     habitTitle: String,
     habitDescription: String,
     userID: String,
-    frequency: Number,
-    timePeriod: Number,
-    validDays: Array
+    sunday: Boolean,
+    monday: Boolean,
+    tuesday: Boolean,
+    wednesday: Boolean,
+    thursday: Boolean,
+    friday: Boolean,
+    saturday: Boolean
 });
 
 const habitLogSchema = mongoose.Schema({
@@ -97,7 +101,15 @@ const createHabit = async(habitDetails) => {
         console.log(habitDetails);
         let returnedHabit = await Habits.create({
             habitTitle: habitDetails.habitTitle,
-            habitDescription: habitDetails.habitDescription
+            habitDescription: habitDetails.habitDescription,
+            userID: habitDetails._id,
+            sunday: habitDetails.sunday,
+            monday: habitDetails.monday,
+            tuesday: habitDetails.tuesday,
+            wednesday: habitDetails.wednesday,
+            thursday: habitDetails.thursday,
+            friday: habitDetails.friday,
+            saturday: habitDetails.saturday
         })
         .then(doc => console.log(doc))
         .catch((err) => console.log(err));
