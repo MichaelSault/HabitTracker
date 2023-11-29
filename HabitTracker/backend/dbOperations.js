@@ -98,11 +98,11 @@ const createHabit = async(habitDetails) => {
     console.log("creating a habit...");
 
     try {
-        console.log(habitDetails);
+        console.log(habitDetails.userID);
         let returnedHabit = await Habits.create({
             habitTitle: habitDetails.habitTitle,
             habitDescription: habitDetails.habitDescription,
-            userID: habitDetails._id,
+            userID: habitDetails.userID,
             sunday: habitDetails.sunday,
             monday: habitDetails.monday,
             tuesday: habitDetails.tuesday,
@@ -111,7 +111,7 @@ const createHabit = async(habitDetails) => {
             friday: habitDetails.friday,
             saturday: habitDetails.saturday
         })
-        .then(doc => console.log(doc))
+        .then(res => console.log("second return", res))
         .catch((err) => console.log(err));
 
         console.log("Returned From Query: ", returnedHabit);

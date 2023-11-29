@@ -44,7 +44,7 @@ function HabitTracker() {
     const handleClose = () => setOpen(false);
 
     const [userData, setUserData] = useState({
-        _id: "", 
+        userID: "", 
         username: "", 
         password: "", 
         email: "", 
@@ -86,7 +86,10 @@ function HabitTracker() {
     return (
         <>
             <div id='bodyTest' style={{width:"100%", margin:"auto auto", textAlign:"center"}}>
-                <h2>{userData.username}'s Habit Tracker</h2>
+                <h3>Welcome user {userData.userID}</h3>
+                <br/>
+                <h1>{userData.username}'s Habit Tracker</h1>
+                <br/>
 
                 <Button onClick={handleOpen}>New Habit</Button>
                 <Modal
@@ -96,7 +99,7 @@ function HabitTracker() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                        <CreateHabit />
+                        <CreateHabit user={userData} />
                     </Box>
                 </Modal>
                 

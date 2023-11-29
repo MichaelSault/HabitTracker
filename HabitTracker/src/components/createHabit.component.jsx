@@ -5,8 +5,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import '../App.css';
 
-function HabitTracker() {
+function HabitTracker(userData) {
+    console.log(userData.user.userID);
     const [habitDetails, setHabitDetails] = useState({
+        userID: userData.user.userID,
         habitTitle: "",
         habitDescription: "",
         sunday: false,

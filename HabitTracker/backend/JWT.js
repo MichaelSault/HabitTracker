@@ -57,7 +57,7 @@ const getJWT = async(userData, secret) => {
         exp: 60*60*24,      // sets to expire in 24hours
 
         //user data
-        id: userData._id,
+        userID: userData.userID,
         username: userData.username,
         email: userData.email,
         firstName: userData.firstName,
@@ -82,12 +82,11 @@ const getJWT = async(userData, secret) => {
 }
 
 const decodeJWT = async(JWT) => {
-    console.log("does this run?");
     const token = JWT;
     const tokenDecodablePart = token.split('.')[1];
     console.log("decodable part: ", tokenDecodablePart);
     const decoded = Buffer.from(tokenDecodablePart, 'base64').toString();
-    console.log(decoded);
+    console.log("does this include the userID?", decoded);
 
     return(decoded);
 }
