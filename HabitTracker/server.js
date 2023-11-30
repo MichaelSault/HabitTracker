@@ -36,7 +36,7 @@ app.post("/SignUpUser", async (req, res) => {
 //checks is a user exists in the database
 app.post('/loginUser', async(req, res) => {
     const result = await dbOperation.loginUser(req.body);
-    console.log("Returned From Query --->", result[0]._id.toHexString());
+    console.log("Returned From Query --->", result[0]._id);
     console.log(result[0]);
     res.send (result[0]);
     console.log("was this code reached?");
