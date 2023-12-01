@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.14",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
