@@ -142,6 +142,14 @@ function Login() {
                             className="mb-3"
                         />
                         </FloatingLabel>
+                        <Form.Check
+                            inline
+                            label='Remember My Credentials'
+                            name='rememberMe'
+                            type='checkbox'
+                            id='rememberMe'
+                            onChange={handleChange}
+                        />
                     </Form.Group>
                     <Button variant="outline-dark" style={{width:"100%", marginBottom:'1rem'}} onClick={logIn}>Login</Button>
                 </Form>
